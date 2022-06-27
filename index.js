@@ -19,10 +19,11 @@ async function run(){
     try{
         await client.connect();
         const mobileCollection = client.db("iphone").collection("data1");
+        const mobileCollection1 = client.db("samsung").collection("data2");
         console.log('connected');
 
 
-
+        // iphone
         app.get('/iphones', async(req , res)=>{
             const query = {};
             const cursor = mobileCollection.find(query);
@@ -39,6 +40,21 @@ async function run(){
             const result =await mobileCollection.findOne(query);
             res.send(result);
 
+        })
+
+        // samsung
+        app.get('/samsungs', async(req , res)=>{
+            const query = {};
+            const cursor = mobileCollection1.find(query);
+            const result = await cursor.toArray();
+            res.send(result)
+        })
+
+        app.get('/samsungs/:id' , async(req , res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await mobileCollection1.findOne(query);
+            res.send(result);
         })
 
     }
