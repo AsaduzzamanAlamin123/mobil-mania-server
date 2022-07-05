@@ -322,6 +322,9 @@ run().catch(console.dir);
 app.get('/',(req , res)=>{
     res.send('My server is running')
 });
+app.get('/hero' , (req , res)=>{
+    res.send('hero mets heroku')
+})
 
 app.listen(port , ()=>{
     console.log('my server port is',port);
